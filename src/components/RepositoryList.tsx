@@ -13,10 +13,13 @@ interface Repository {
 export function RepositoryList () {
   const [repo, setRepo] = useState<Repository[]>([]);
 
+   const response = fetch('https://api.github.com/users/kevinportella/repos')
+   .then(response => response.json());
+
+   const data = response.then(data => setRepo(data));
+
   useEffect(() => {
-    fetch('https://api.github.com/users/kevinportella/repos')
-      .then(response => response.json())
-      .then(data => setRepo(data))
+    data
   }, [])
 
   return (
